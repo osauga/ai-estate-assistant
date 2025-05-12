@@ -1,0 +1,88 @@
+
+# 📘 AI Estate Assistant — Development + Runtime Cheat Sheet
+
+## ✅ Ollama Setup
+
+### Running Ollama
+
+- **Ollama App → Recommended**
+    - Run Ollama app → automatically runs in background
+    - Does not tie up terminal
+    - Starts on boot if desired
+
+- **ollama serve (Manual Terminal Command)**
+    - Run: `ollama serve`
+    - Ties up terminal until `Ctrl + C`
+    - Use only if you want manual control
+
+- **Stopping Ollama (Manual)**
+    - Use `Ctrl + C` to stop when running in terminal
+
+### Ollama Model Location
+
+- **Custom Model Path (Shared / OneDrive)**
+    - Use `config.toml` in `C:/Users/messi/.ollama/`
+    - Example:
+    
+```
+[paths]
+models = "C:/Users/messi/OneDrive/AI/Models/OllamaModels"
+```
+
+- **OR → Environment Variable**
+    - `OLLAMA_MODELS` → takes priority if set
+    - Remember to restart VS Code or terminal after changing env vars
+
+- **Verify Path**
+    - `ollama serve` will show the models path in log
+    - `ollama list` → should show available models
+
+## ✅ Chainlit Setup
+
+### Running Chainlit
+
+- `chainlit run chat.py`
+- Opens browser UI for chat
+- Automatically connects to Ollama
+
+### Chainlit + LangChain + Ollama Integration
+
+- Ollama app or `ollama serve` **must be running**
+- Chainlit chat will send queries through LangChain to Ollama
+
+### Translation Notice
+
+```
+Translation file for en-CA not found. Using default translation en-US.
+```
+
+✅ Safe to ignore → Chainlit uses US English if no Canadian translation found
+
+## ✅ Multi-Document + Memory Support (chat.py)
+
+- `chat.py` supports loading multiple documents (e.g. DOCX)
+- Uses LangChain document loaders + FAISS vector store
+- Chat memory keeps recent conversation context
+- Ollama model answers based on document + memory
+
+## ✅ General Workflow for Development
+
+```
+[ Start Ollama (App or Serve) ] --> [ Run Chainlit (chat.py) ] --> [ Chat in browser ]
+```
+
+### Notes
+- Leave Ollama running while using Chainlit
+- Use separate terminal for Chainlit if using `ollama serve` (optional)
+- Use Ollama app if you prefer background auto-start → recommended for local dev
+
+## ✅ Troubleshooting Tips
+
+- **"Access Denied" on models → OneDrive permissions issue → move folder or set correct permissions**
+- **Ollama ignoring config.toml → Make sure it is in C:/Users/messi/.ollama/config.toml**
+- **Ollama using old model path → Environment variable overrides config.toml**
+- **Chainlit stuck in terminal → Ollama serve ties up terminal → use new terminal or stop with Ctrl + C**
+
+---
+
+Last Updated: 2025-05-08 04:14
