@@ -1,0 +1,6 @@
+chainlit
+langchain
+langchain-community
+faiss-cpu
+ollama
+unstructured[all-docs]
